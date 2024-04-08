@@ -1,0 +1,15 @@
+name: 'Webhook Action'
+description: 'Send a webhook with repository details and additional data'
+inputs:
+  data:
+    description: 'Additional data to send with the webhook'
+    required: true
+  webhook-url:
+    description: 'The URL to send the webhook to'
+    required: true
+  bearer-token:
+    description: 'The bearer token for authorization'
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
