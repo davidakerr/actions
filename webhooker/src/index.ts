@@ -5,6 +5,7 @@ import axios from "axios";
 export async function run() {
   try {
     const dataInput = core.getInput("data");
+    const secretsInput = core.getInput("secrets");
     const webhookUrl = core.getInput("webhook-url");
     const bearerToken = core.getInput("bearer-token");
   
@@ -17,12 +18,22 @@ export async function run() {
       return;
     }
 
+    let secrets;
+
+    try {
+      secrets = JSON.parse(secretsInput);
+    } catch (error) {
+      core.setFailed("Secrets are not a valid JSON string");
+      return;
+    }
+
     const { owner, repo } = github.context.repo;
     const { eventName, ref, sha } = github.context;
 
     const payload = {
       branch: ref.replace("refs/heads/", ""),
       data,
+      secrets,
       eventName,
       owner,
       repo,
