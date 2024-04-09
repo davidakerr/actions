@@ -4,6 +4,9 @@ inputs:
   data:
     description: 'Additional data to send with the webhook'
     required: true
+  secrets:
+    description: 'Secrets to send with the webhook'
+    required: false
   webhook-url:
     description: 'The URL to send the webhook to'
     required: true

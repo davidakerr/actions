@@ -47,7 +47,8 @@ export async function run() {
     });
 
   } catch (error: any) {
-    console.log(error);
+    console.error(error.response?.data ?? error.message);
+
     core.setFailed(error.message ?? "An error occurred");
   }
 }
